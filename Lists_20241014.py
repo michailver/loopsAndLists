@@ -401,12 +401,43 @@
 # skaičius 4 dalinasi iš 2, 4
 # skaičius 5 dalinasi iš 5
 # skaičius 6 dalinasi iš 2, 3, 6
+# import random
+# # tuscias list
+# numbers = []
+# # skaiciu generavimas
+# size = int(input("kiek skaiciu norite: "))
+# for i in range(size):
+#    numbers.append(random.randint(1, 20))
+# print(numbers)
+#
+# for number in numbers:
+#     divisible = []
+#     for i in range(1,number+1):
+#         #print(f'i = {i} | number = {number}')
+#         if number % i == 0:
+#             divisible.append(i)
+#     if len(divisible) > 0:
+#         print(f'skaičius {number} dalinasi iš: ', end='')
+#         print(', '.join(map(str, divisible)))
+#         # for div_num in divisible:
+#         #     print(f'{div_num} ',end='')
 
 #print('##############################################################################################################')
 # 29.Sukurkite programą, kurioje vartotojas galėtų įvesti norimą kiekį žodžių
 # (pasirenka iš pradžių ir vykdomas for iki to kiekio skaičiaus, arba
 # vykdomas while kol neįveda q ar kokio kito simbolio/žodžio). Išveskite
 # visus šiuos žodžius ekrane.
+
+# tuscias list
+words = []
+# skaiciu generavimas
+size = int(input("kiek zodziu norite ivesti: "))
+for i in range(size):
+    word = str(input(f'iveskit {i+1} zodi is {size}: '))
+    words.append(word)
+
+print(', '.join(map(str, words)))
+
 
 #print('##############################################################################################################')
 # 30.Susikurkite sąrašą iš pasirinktų žodžių. Atskirose eilutėse išveskite patį
