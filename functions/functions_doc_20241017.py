@@ -30,6 +30,7 @@ def print_list (list1):
 list = ['pienas', 'duona', 'manai', 'sorai', 'suris', 5, 7]
 print_list(list)
 print('##############################################################################################################')
+
 # 5. Sukurkite Funkciją kuri priima du int tipo kintamuosius, min ir max reikšmėms nustatyti ir sugeneruoja random int
 # skaičių ir jį gražintų.
 import random
