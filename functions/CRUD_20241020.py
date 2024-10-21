@@ -15,46 +15,45 @@ def updateDoorEnterStatus(users):
         if user[4] and user[3] < datetime.date.today():
             user[4] = False
             user[5] = False
-            # print(f'{user[0]} False: {user[3]}')
         if user[4] == False and user[3] >= datetime.date.today():
-            # print(f'{user[0]} True: {user[3]}')
             user[4] = True
+
+
+def printMenu():
+    print('*' * 40)
+    print('1. C: Pridet nauja irasha. ')
+    print('2. R: Parodyti įrašus.')
+    print('3. U: Redaguoti irašus.')
+    print('4. D: Pašalinti įraša.')
+    print('5.    Uždaryti programa')
+    print('*' * 40)
+
+
+def newUserInsert():
+    names = input('Vartotojo vardas: ')
+    surname = input('Vartotojo pavarde: ')
+    start_date = datetime.datetime.strptime(input('Įveskite pradžios datą (yyyy-mm-dd): '), "%Y-%m-%d").date()
+    end_date = start_date + datetime.timedelta(days=180)
+    enter = True  # galimibe patekti
+    box = input('Ar yra sandeliavimo dėžė? (taip/ne): ').lower() == 'taip'  # naris nebutinai turi tureti
+    users.append([names, surname, start_date, end_date, enter, box])
 
 
 print('-= Dirbtuviu nariu valdymo systema =-')
 print('ishsirinkit veiksma ivedus to veiksmo numeri')
-
 while True:
     updateDoorEnterStatus(users)
-    print('*' * 40)
-    print('1. C: Pridet nauja irasha. ')
-    print('2. R: Parodyti įrašus.')
-    print('3. U: Reaguoti irašus.')
-    print('4. D: Pašalinti įraša.')
-    print('5.    Uždaryti programa')
-    print('*' * 40)
+    printMenu()
     choice = input('Komandos numeris: ')
     print('*' * 40)
-
     match choice:
         case '1':
-            names = input('Vartotojo vardas: ')
-            surname = input('Vartotojo pavarde: ')
-            # start_date = datetime.date.strftime(input('Naristes pradzia (yyyy-mm-dd): '), "%Y-%m-%d")
-            start_date = datetime.datetime.strptime(input('Įveskite pradžios datą (yyyy-mm-dd): '), "%Y-%m-%d").date()
-            # end_date = (datetime.date(start_date)) + (datetime.timedelta(6 * 365 / 12).isoformat())
-            end_date = start_date + datetime.timedelta(days=180)
-            enter = True #galimibe patekti
-            box = input('Ar yra sandeliavimo dėžė? (taip/ne): ').lower() == 'taip' #naris nebutinai turi tureti
-            users.append([names, surname, start_date, end_date, enter,box])
+            newUserInsert()
         case '2':
-            # for i in range(len(users)):
-            #     print(f'Vartotojas: {users[i][0]} {users[i][1]} | Naristes pradžia: {users[i][2]} | Galioja iki: {users[i][3]}, | '
-            #           f'Duru atidarimas: {'Taip' if users[i][4] else 'Ne' } | '
-            #           f'Dėžę daiktais: {'Turi' if users[i][5] else 'Neturi' }')
-            print(tabulate(users, headers = ['Vardas', 'Pavarde', 'naristes pradzia', 'naristes pabaiga', 'Duris', 'Deze'],tablefmt='orgtbl', showindex='always'))
+            print(tabulate(users, headers = ['Vardas', 'Pavarde', 'naristes pradzia', 'naristes pabaiga', 'Duris', 'Deze'],
+                           tablefmt='orgtbl', showindex='always'))
         case '3':
-            edit_index = int(input(f'Iveskit nario numeri (indeksa) kuri noretumete redaguoti (max:{len(users)}): '))
+            edit_index = int(input(f'Iveskit nario numeri (indeksa) kuri noretumete redaguoti (max:{len(users)-1}): '))
             print('*' * 40)
             edit_all = input('Ar redaguoti viska(1) ar tik pratest(2) nariste nuo šiandiena? (1/2): ').lower() == '1'
             if edit_all:
@@ -71,8 +70,6 @@ while True:
             else:
                 start_date = datetime.date.today()
                 end_date = datetime.date.today() + datetime.timedelta(days=180)
-                print(f'{users[edit_index][2]} = {start_date}')
-                print(f'{users[edit_index][3]} = {end_date}')
                 users[edit_index][2] = start_date
                 users[edit_index][3] = end_date
 
@@ -84,4 +81,3 @@ while True:
             break
         case _:
             print ('ERROR: Programos ivedimo klaida.')
-
